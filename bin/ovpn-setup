@@ -161,9 +161,9 @@ OVPN_MTU=''
 OVPN_NAT=0
 OVPN_PORT=''
 OVPN_PROTO=''
-OVPN_PUSH=()
+OVPN_PUSH=("redirect-gateway def1 bypass-dhcp")
 OVPN_ROUTES=()
-OVPN_SERVER=192.168.255.0/24
+OVPN_SERVER='10.8.0.0 255.255.255.0'
 OVPN_SERVER_URL=''
 OVPN_TLS_CIPHER=''
 
@@ -284,7 +284,7 @@ fi
 
 # Apply defaults. If dns servers were not defined with -n, use google nameservers
 set +u
-[ -z "$OVPN_DNS_SERVERS" ] && OVPN_DNS_SERVERS=("8.8.8.8" "8.8.4.4")
+[ -z "$OVPN_DNS_SERVERS" ] && OVPN_DNS_SERVERS=("208.67.222.222" "208.67.220.220")
 [ -z "$OVPN_PROTO" ] && OVPN_PROTO=udp
 [ -z "$OVPN_PORT" ] && OVPN_PORT=1194
 set -u
@@ -331,6 +331,7 @@ key-direction 0
 keepalive $OVPN_KEEPALIVE
 persist-key
 persist-tun
+duplicate-cn
 
 proto $OVPN_PROTO
 # Rely on Docker to do port mapping, internally always 1194
