@@ -119,7 +119,8 @@ function create_server() {
     docker run -v "$VOLUME_NAME:/etc/openvpn" --rm "$IMAGE_NAME" ovpn-setup \
       -u "$SERVER_PUBLIC_URL" \
       -C "AES-256-GCM" \
-      -b
+      -b \
+      -e duplicate-cn
 
 
   else
