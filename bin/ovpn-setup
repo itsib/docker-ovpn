@@ -156,14 +156,14 @@ OVPN_ENV=${OPENVPN}/ovpn_env.sh
 OVPN_EXTRA_CLIENT_CONFIG=()
 OVPN_EXTRA_SERVER_CONFIG=()
 OVPN_FRAGMENT=''
-OVPN_KEEPALIVE="10 60"
+OVPN_KEEPALIVE="15 120"
 OVPN_MTU=''
 OVPN_NAT=0
 OVPN_PORT=''
 OVPN_PROTO=''
-OVPN_PUSH=("redirect-gateway def1 bypass-dhcp")
+OVPN_PUSH=("route 192.168.1.0")
 OVPN_ROUTES=()
-OVPN_SERVER=192.168.255.0/24
+OVPN_SERVER=10.8.101.0/24
 OVPN_SERVER_URL=''
 OVPN_TLS_CIPHER=''
 
@@ -288,7 +288,7 @@ set +u
 [ -z "$OVPN_PROTO" ] && OVPN_PROTO=udp
 [ -z "$OVPN_PORT" ] && OVPN_PORT=1194
 set -u
-[ "${#OVPN_ROUTES[@]}" == "0" ] && [ "$OVPN_DEFROUTE" == "1" ] && OVPN_ROUTES+=("192.168.254.0/24")
+[ "${#OVPN_ROUTES[@]}" == "0" ] && [ "$OVPN_DEFROUTE" == "1" ] && OVPN_ROUTES+=("192.168.1.0/24")
 
 # Preserve config
 if [ -f "$OVPN_ENV" ]; then
