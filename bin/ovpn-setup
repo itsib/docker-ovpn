@@ -163,7 +163,7 @@ OVPN_PORT=''
 OVPN_PROTO=''
 OVPN_PUSH=("redirect-gateway def1 bypass-dhcp")
 OVPN_ROUTES=()
-OVPN_SERVER=10.8.0.0/8
+OVPN_SERVER=''
 OVPN_SERVER_URL=''
 OVPN_TLS_CIPHER=''
 
@@ -284,7 +284,7 @@ fi
 
 # Apply defaults. If dns servers were not defined with -n, use google nameservers
 set +u
-[ -z "$OVPN_DNS_SERVERS" ] && OVPN_DNS_SERVERS=("208.67.222.222" "208.67.220.220")
+[ -z "$OVPN_DNS_SERVERS" ] && OVPN_DNS_SERVERS=("1.1.1.1" "1.0.0.1")
 [ -z "$OVPN_PROTO" ] && OVPN_PROTO=udp
 [ -z "$OVPN_PORT" ] && OVPN_PORT=1194
 set -u
