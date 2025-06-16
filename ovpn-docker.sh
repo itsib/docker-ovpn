@@ -140,7 +140,7 @@ function server_up() {
 
   result=$(docker container inspect "$CONTAINER_NAME" 2>&1 1>/dev/null)
   if [[ ${result,,} =~ "no such container" ]]; then
-    docker run --name "$CONTAINER_NAME" -v "$VOLUME_NAME:/etc/openvpn" -d -p "$PORT:1194/udp" --cap-add=NET_ADMIN --device /dev/net/tun --restart unless-stopped  "$IMAGE_NAME"
+    docker run --name "$CONTAINER_NAME" -v "$VOLUME_NAME:/etc/openvpn" -d -p "$PORT:1194/udp" -p 443:443 --cap-add NET_ADMIN --cap-add MKNOD --device /dev/net/tun --restart unless-stopped  "$IMAGE_NAME"
   elif [ -z "$result" ]; then
     docker container start --restart unless-stopped "$CONTAINER_NAME"
   fi
